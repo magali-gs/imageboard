@@ -5,14 +5,18 @@
     <title>My imageboard</title>
 </head>
 <body>
+    <header>
       <h1>Imageboard</h1>
-      <h3>Latest Images</h3>
-    <div id='main'>
-        <div class="card" v-for='info in rows'>
-            <img v-bind:src="info.url" alt="">
-            <h3>{{info.description}}</h3>
+    </header>
+    <main>
+        <h3>Latest Images</h3>
+        <div id='main' class="wrapper">
+            <div class="card" v-for='image in images'>
+                <img v-bind:src="image.url" alt="">
+                <p>{{image.title}}</p>
+            </div>
         </div>
-    </div>
+    </main>
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
     <script src="/js/script.js"></script>

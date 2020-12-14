@@ -5,7 +5,7 @@ module.exports.getImage = () => {
     const q = `
     SELECT *
     FROM images
-    ORDER BY created_at
+    ORDER BY created_at DESC
     LIMIT 6
     ;
     `;
