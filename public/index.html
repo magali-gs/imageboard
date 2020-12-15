@@ -11,9 +11,20 @@
     <main>
         <h3>Latest Images</h3>
         <div id='main' class="wrapper">
+            <div>
+                <form method="POST" action="/upload" enctype="multipart/form-data">
+                    <input type="text" name="title" v-model="title">
+                    <input type="file" name="image" accept="image/*" v-on:change="handleFileChange">
+                    <button @click="handleUpload">Upload</button>
+                </form>
+            </div>
             <div class="card" v-for='image in images'>
+                <section class="img-section">
                 <img v-bind:src="image.url" alt="">
+                </section>
+                <section class="txt-section">
                 <p>{{image.title}}</p>
+                </section>
             </div>
         </div>
     </main>
