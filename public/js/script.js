@@ -3,7 +3,20 @@ new Vue({
     data: {
         images: [],
         title: "",
-        img: null
+        description: '',
+        username: '',
+        image: null
+    },
+    mounted: function () {
+        var self = this;
+        axios
+            .get("/images")
+            .then(function (response) {
+                self.images = response.data;
+            })
+            .catch(function (error) {
+                console.log("error: ", error);
+            });
     },
     methods: { 
         handleFileChange: function(e) {
@@ -16,25 +29,14 @@ new Vue({
             e.preventDefault();
             //POST data to the /uploads path with axios
             var formData = new FormData();
-
             formData.append("title", this.title);
+            formData.append("description", this.description);
+            formData.append("username", this.username);
             formData.append("image", this.image);
 
             axios.post("/upload", formData).then((res) => {
-                console.log("formData res", res);
+                this.images.unshift(res.data);
             });
         }
-
-    },
-    mounted: function () {
-        var self = this;
-        axios
-            .get("/images")
-            .then(function (response) {
-                self.images = response.data;
-            })
-            .catch(function (error) {
-                console.log("error: ", error);
-            });
     }
 });
