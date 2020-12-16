@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&family=Sedgwick+Ave+Display&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:900i&display=swap');
 
 * {
     box-sizing: border-box;
@@ -6,76 +7,117 @@
 }
 
 body {
-    background-color: rgb(236, 218, 209);
+    background-color: #7ea4af;
     font-family: 'Montserrat', sans-serif;
+    color: #1a1a1a;
+    display: grid;
+    grid-template-rows: 20vh 1fr 3vh;
+    min-height: 100vh;
 }
 
 header {
-    position: relative;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 10vh;
-    display: flex;
+    display:flex;
+    justify-content: center;
     align-items: center;
-    border: 1px solid black;
+    border: 1px solid #302928;
 }
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    border: 1px solid #232221;
+}
+
 
 h1 {
-    font-family: 'Sedgwick Ave Display', cursive;
-    padding: 1vh 1vw;
-}
-/* 
-.wrapper {
-    display: grid;
-    max-width: 1200px;
-    margin: 0 auto;
-    grid-template-columns: repeat(2, 1fr);
-    grid-column-gap: 1vw;
-    grid-row-gap: 1vh;
-    justify-content: space-around;
-    grid-auto-flow: row;
+    font-size: calc(4.5rem + 1vmin);
+    font-weight: 400;
+	letter-spacing: 0.1em;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: white;
+    text-shadow:
+    8px 8px #f04725,
+    20px 20px #232221;
 }
 
-.form {
-    grid-column: row1 / span 3;
-} */
+.wrapper {
+    display: grid;
+    grid-template-rows: 15vh 5vh 1fr;
+    margin: 2vh 2vw;
+}
+
+.images-field {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-gap: 1em;
+    margin: 1vh 1vw;
+}
 
 .card {
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
-    background-color: #fff;
+    border: 1px solid #302928;
     justify-content: center;
     align-items: center;
-    /* padding: 2vh 2vw; */
+    height: 300px;
+    width: 400px;
 }
-
-.img-section {
-    height: 80%;
-    width: 95%;
-}
-
-/* .txt-section {
-    height: 80%;
-    width: 90%;
-} */
 
 img {
-    height: 200px;
     width: 100%;
-    object-fit: cover;
-    
+    height: auto;
 }
 
-@media screen and (min-width: 600px) {
-    .wrapper {
-        grid-template-columns: repeat((2, 1fr));
-    }  
+label {
+    font-size: calc(0.5rem + 1vmin);
 }
 
-@media screen and (min-width: 900px) {
-    .wrapper {
-        grid-template-columns: repeat(3, 1fr);
-    }  
+input {
+    display: inline;
+    margin: 1vh 1vw;
+    padding: 1vh 1vw;
+    background: transparent;
+    border: 2px solid #302928;
+    outline: none;
+    appearance: none;
+    font-family: inherit;
+    /* font-size: calc(0.4rem + 1vmin); */
+    /* line-height: 1rem */
 }
+
+button {
+    margin: 1vh 1vw;
+    padding: 1vh 1vw;
+    background: transparent;
+    border: 2px solid #302928;
+    outline: none;
+    appearance: none;
+    font-family: inherit;
+    cursor: pointer;
+    font-size: calc(0.5rem + 1vmin);
+}
+
+.inputfile::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.inputfile {
+    content: 'Select:';
+    outline: none;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: calc(0.5rem + 1vmin);
+}
+
+
+/* 
+@media screen and (max-width: 600px) {
+    .images-field {
+        display: flex;
+        flex-direction: column;
+    }
+} */

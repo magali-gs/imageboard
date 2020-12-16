@@ -50,12 +50,14 @@ app.post("/upload", uploader.single('image'), s3.upload, (req, res) => {
             uploadedImage.username,
             uploadedImage.title,
             uploadedImage.description
-        ).then(res.json(uploadedImage));
+        )
+            .then(res.json(uploadedImage));
     } else {
         res.json({
             success: false
         });
     }
 });
+
 
 app.listen(8080, () => console.log("Imageboard up and running :)"));
