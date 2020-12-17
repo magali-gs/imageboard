@@ -30,28 +30,27 @@
             <h3>Latest Images</h3>
             <div class="images-field">
                 <div class="card" v-for='image in images' :key='image.url'>
-                    <section class="img-section">
                     <img v-bind:src="image.url" :alt="image.title" @click='getImageId(image)'>
-                    </section>
-                    <section class="txt-section">
                     <p>{{image.title}}</p>
-                    </section>
                 </div>
             </div>
             <highlighted-image
             v-if='imageId'
             :image-Id='imageId'
+            @close="closeMe"
             ></highlighted-image>
         </div>
     </main>
     <footer>footer</footer>
     <script id='template' type="text/x-template">
         <div class="component">
+            <h4 @click='closeModal'>Close me</h4>
             <img :src="url">
             <h1>{{imageId}}</h1>
             <h3>{{title}}</h3>
             <p>{{description}}</p>
             <p>Uploaded by {{username}} on {{created_at}}</p>
+            
         </div>
     </script>
     <script src="/js/vue.js"></script>

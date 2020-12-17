@@ -34,6 +34,14 @@ app.get('/images', (req, res) => {
     });
 });
 
+app.get("/highlighted/:imageId", (req, res) => {
+    console.log(req.params);
+    const { imageId } = req.params;
+    db.getImageInfo(imageId).then(({ rows }) => {
+        res.json(rows);
+    });
+});
+
 app.post("/upload", uploader.single('image'), s3.upload, (req, res) => {
     console.log('POST request made');
     console.log("req.body", req.body);

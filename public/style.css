@@ -67,9 +67,21 @@ h1 {
     width: 400px;
 }
 
+.card p {
+    padding: 20px 10px;
+    background-color: #252a34;
+    width: 100%;
+    opacity: 0.7;
+    font-size: 18px;
+    font-weight: bolder;
+    color: #eaeaea;
+}
+
 img {
     width: 100%;
     height: auto;
+    background-color: white;
+    object-fit: contain;
 }
 
 label {

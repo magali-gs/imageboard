@@ -27,6 +27,11 @@
                 .catch(function (error) {
                     console.log("error: ", error);
                 });
+        }, methods: {
+            closeModal: function() {
+                console.log('closeModal click worked');
+                this.$emit('close');
+            }
         }
     });
 
@@ -74,6 +79,10 @@
             getImageId: function(img) {
                 this.imageId = img.id;
                 console.log("getImageId worked");
+            },
+            closeMe: function() {
+                console.log('closeme in the instance');
+                this.imageId = null;
             }
         },
     });
