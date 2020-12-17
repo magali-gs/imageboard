@@ -44,6 +44,7 @@
             username: "",
             image: null,
             imageId: null,
+            lastId: null
         },
         mounted: function () {
             var self = this;
@@ -76,14 +77,22 @@
                     this.images.unshift(res.data);
                 });
             },
-            getImageId: function(img) {
+            getImageId: function (img) {
                 this.imageId = img.id;
                 console.log("getImageId worked");
             },
-            closeMe: function() {
-                console.log('closeme in the instance');
+            closeMe: function () {
+                console.log("closeme in the instance");
                 this.imageId = null;
-            }
+            },
+            moreImages: function (e) {
+                e.preventDefault();
+                console.log("moreImages button worked");
+                axios.get('/images').then(( { data }) => {
+                    const lastId = data[0].id;
+                    console.log("lastId", lastId);
+                });
+            },
         },
     });
 })();

@@ -29,13 +29,15 @@ const uploader = multer({
 app.use(express.static("./public"));
 
 app.get('/images', (req, res) => {
+    console.log('GET request made to /images');
     db.getImage().then(({ rows }) => {
         res.json(rows);
     });
 });
 
 app.get("/highlighted/:imageId", (req, res) => {
-    console.log(req.params);
+    console.log("GET request made to /highlighted/:imageId");
+    console.log("req.params", req.params);
     const { imageId } = req.params;
     db.getImageInfo(imageId).then(({ rows }) => {
         res.json(rows);
@@ -45,7 +47,6 @@ app.get("/highlighted/:imageId", (req, res) => {
 app.post("/upload", uploader.single('image'), s3.upload, (req, res) => {
     console.log('POST request made');
     console.log("req.body", req.body);
-    console.log("req.file.path", req.file.filename);
     if(req.file) {
         let uploadedImage = {
             title: req.body.title,
