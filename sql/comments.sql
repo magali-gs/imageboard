@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS comments;
+
+CREATE TABLE images(
+    id SERIAL PRIMARY KEY,
+    username VARCHAR NOT NULL,
+    comment TEXT,
+    image_id INTEGER UNIQUE NOT NULL REFERENCES images(id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

@@ -1,3 +1,4 @@
+
 (function () {
     Vue.component("highlighted-image", {
         template: "#template",
@@ -27,7 +28,8 @@
                 .catch(function (error) {
                     console.log("error: ", error);
                 });
-        }, methods: {
+        }, 
+        methods: {
             closeModal: function() {
                 console.log('closeModal click worked');
                 this.$emit('close');
@@ -44,14 +46,13 @@
             username: "",
             image: null,
             imageId: null,
-            lastId: null
         },
         mounted: function () {
             var self = this;
             axios
                 .get("/images")
-                .then(function (response) {
-                    self.images = response.data;
+                .then(function (res) {
+                    self.images = res.data;
                 })
                 .catch(function (error) {
                     console.log("error: ", error);
@@ -59,7 +60,6 @@
         },
         methods: {
             handleFileChange: function (e) {
-                console.log("e.target.files", e.target.files);
                 //update the image property
                 this.image = e.target.files[0];
             },
@@ -85,12 +85,15 @@
                 console.log("closeme in the instance");
                 this.imageId = null;
             },
-            moreImages: function (e) {
-                e.preventDefault();
+            moreImages: function () {
+                var self = this;
                 console.log("moreImages button worked");
-                axios.get('/images').then(( { data }) => {
-                    const lastId = data[0].id;
-                    console.log("lastId", lastId);
+                const lastId = this.images[this.images.length-1].id;
+                console.log(lastId);
+                axios.get("/more/" + lastId).then(({ data }) => {
+                    data.forEach(element => {
+                        self.images.push(element);
+                    });
                 });
             },
         },

@@ -30,18 +30,11 @@ app.use(express.static("./public"));
 
 app.get('/images', (req, res) => {
     console.log('GET request made to /images');
-    db.getImage().then(({ rows }) => {
-        res.json(rows);
-    });
-});
-
-app.get("/highlighted/:imageId", (req, res) => {
-    console.log("GET request made to /highlighted/:imageId");
-    console.log("req.params", req.params);
-    const { imageId } = req.params;
-    db.getImageInfo(imageId).then(({ rows }) => {
-        res.json(rows);
-    });
+    db.getImage()
+        .then(({ rows }) => {
+            res.json(rows);
+        })
+        .catch((err) => console.log("Error in getImage", err));
 });
 
 app.post("/upload", uploader.single('image'), s3.upload, (req, res) => {
@@ -60,12 +53,44 @@ app.post("/upload", uploader.single('image'), s3.upload, (req, res) => {
             uploadedImage.title,
             uploadedImage.description
         )
-            .then(res.json(uploadedImage));
+            .then(res.json(uploadedImage))
+            .catch((err) => console.log("Error in uploadImageDb", err));
     } else {
         res.json({
             success: false
         });
     }
+});
+
+app.get("/highlighted/:imageId", (req, res) => {
+    console.log("GET request made to /highlighted/:imageId");
+    const { imageId } = req.params;
+    db.getImageInfo(imageId)
+        .then(({ rows }) => {
+            res.json(rows);
+        })
+        .catch((err) => console.log("Error in getImageInfo", err));
+});
+
+app.get("/more/:lastId", (req, res) => {
+    const { lastId } = req.params;
+    console.log("GET request made to /more",lastId);
+    console.log(lastId);
+    db.getMoreImages(lastId)
+        .then(({ rows }) => {
+            console.log(rows);
+            res.json(rows);
+        })
+        .catch((err) => console.log("Error in getMoreImages", err));
+});
+
+app.get('/comments/:imageId', (req, res) => {
+    console.log("GET request made to /comments");
+    console.log(req.params.id);
+});
+
+app.post("/comments", (req, res) => {
+    console.log("POST request made to /comments");
 });
 
 
