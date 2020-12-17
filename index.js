@@ -78,7 +78,6 @@ app.get("/more/:lastId", (req, res) => {
     console.log(lastId);
     db.getMoreImages(lastId)
         .then(({ rows }) => {
-            console.log(rows);
             res.json(rows);
         })
         .catch((err) => console.log("Error in getMoreImages", err));

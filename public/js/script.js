@@ -46,6 +46,7 @@
             username: "",
             image: null,
             imageId: null,
+            hasMore: true
         },
         mounted: function () {
             var self = this;
@@ -88,13 +89,17 @@
             moreImages: function () {
                 var self = this;
                 console.log("moreImages button worked");
-                const lastId = this.images[this.images.length-1].id;
-                console.log(lastId);
-                axios.get("/more/" + lastId).then(({ data }) => {
-                    data.forEach(element => {
-                        self.images.push(element);
+                const lastId = this.images[this.images.length - 1].id;
+                axios.get("/more/" + lastId)
+                    .then(({ data }) => {
+                        console.log(data);
+                        data.forEach((element) => {
+                            if(element.id == element.lowestId) {
+                                self.hasMore = false;
+                            }
+                            self.images.push(element);
+                        });
                     });
-                });
             },
         },
     });

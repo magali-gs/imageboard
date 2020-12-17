@@ -34,7 +34,7 @@
                     <p>{{image.title}}</p>
                 </div>
             </div>
-            <button @click='moreImages'>More</button>
+            <button @click='moreImages' v-if='hasMore'>More</button>
             <highlighted-image
             v-if='imageId'
             :image-Id='imageId'
