@@ -7,11 +7,11 @@
 }
 
 body {
-    background-color: #7ea4af;
+    background-color: #f4f4f3;
     font-family: 'Montserrat', sans-serif;
     color: #1a1a1a;
     display: grid;
-    grid-template-rows: 20vh 1fr 3vh;
+    grid-template-rows: 30vh 1fr 3vh;
     min-height: 100vh;
 }
 
@@ -19,7 +19,6 @@ header {
     display:flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid #302928;
 }
 
 main {
@@ -28,20 +27,28 @@ main {
 }
 
 footer {
-    border: 1px solid #232221;
+    border: 1px solid #1a1a1a;
 }
 
 
-h1 {
-    font-size: calc(4.5rem + 1vmin);
-    font-weight: 400;
-	letter-spacing: 0.1em;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke-width: 3px;
-    -webkit-text-stroke-color: white;
-    text-shadow:
-    8px 8px #f04725,
-    20px 20px #232221;
+.title {
+    font-size: calc(15rem + 1vmin);
+	text-align: center;
+    height:30vh;
+    line-height: 30vh;
+	color: #f4f4f3;
+	background: #ffd53b;
+	font-family: 'Niconne', cursive;
+	font-weight: 700;
+    text-shadow: 5px 5px 0px #f16a78, 
+                  10px 10px 0px #f16a78, 
+                  15px 15px 0px #7da6b1, 
+                  20px 20px 0px #7da6b1, 
+                  25px 25px 0px #7da6b1, 
+                  30px 30px 0px #ffd53b, 
+                  35px 35px 0px #ffd53b, 
+                  40px 40px 0px #ffd53b, 
+                  45px 45px 0px #ffd53b;
 }
 
 .wrapper {
@@ -60,7 +67,7 @@ h1 {
 .card {
     display: flex;
     flex-direction: column;
-    border: 1px solid #302928;
+    /* border: 1px solid #1a1a1a; */
     justify-content: center;
     align-items: center;
     height: 300px;
@@ -69,12 +76,10 @@ h1 {
 
 .card p {
     padding: 20px 10px;
-    background-color: #252a34;
+    background-color:rgba(125, 166, 177, 0.7);
     width: 100%;
-    opacity: 0.7;
-    font-size: 16px;
+    font-size: calc(.6rem + 1vmin);
     font-weight: bolder;
-    color: #eaeaea;
 }
 
 img {
@@ -92,7 +97,7 @@ input {
     margin: 1vh 1vw;
     padding: 1vh 1vw;
     background: transparent;
-    border: 2px solid #302928;
+    border: 2px solid #1a1a1a;
     outline: none;
     appearance: none;
     font-family: inherit;
@@ -104,7 +109,7 @@ button {
     margin: 1vh 1vw;
     padding: 1vh 1vw;
     background: transparent;
-    border: 2px solid #302928;
+    border: 2px solid #1a1a1a;
     outline: none;
     appearance: none;
     font-family: inherit;

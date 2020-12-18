@@ -1,15 +1,57 @@
 
 (function () {
-    Vue.component("highlighted-image", {
-        template: "#template",
+    Vue.component("comments-modal", {
+        template: "#comments-template",
+        props: ["imageId"],
+        data: function () {
+            return {
+                comments: [],
+                userComment: "",
+                comment: "",
+            };
+        },
+        mounted: function () {
+            console.log("props: ", this.imageId);
+            var self = this;
+            axios
+                .get("/comments/" + this.imageId)
+                .then(function ({data}) {
+                    console.log(data);
+                    self.comments = data;
+                })
+                .catch(function (error) {
+                    console.log("error: ", error);
+                });
+        },
+        methods: {
+            uploadComment: function (e) {
+                console.log("uploadComment");
+                var self = this;
+                e.preventDefault();
+                var commentData = {
+                    imageId: this.imageId,
+                    comment: this.comment,
+                    userComment: this.userComment,
+                };
+                console.log(commentData);
+                axios.post("/comments", commentData)
+                    .then((res) => {
+                        self.comments.unshift(res.data);
+                    });
+            },
+        },
+    });
+
+    Vue.component("image-modal", {
+        template: "#image-template",
         props: ["imageId"],
         data: function () {
             return {
                 title: "",
                 description: "",
                 username: "",
-                created_at: '',
-                url: ''
+                created_at: "",
+                url: "",
             };
         },
         mounted: function () {
@@ -23,18 +65,17 @@
                     self.username = data[0].username;
                     self.created_at = data[0].created_at;
                     self.url = data[0].url;
-                    console.log(self.url);
                 })
                 .catch(function (error) {
                     console.log("error: ", error);
                 });
-        }, 
+        },
         methods: {
-            closeModal: function() {
-                console.log('closeModal click worked');
-                this.$emit('close');
-            }
-        }
+            closeModal: function () {
+                console.log("closeModal click worked");
+                this.$emit("close");
+            },
+        },
     });
 
     new Vue({
@@ -45,6 +86,8 @@
             description: "",
             username: "",
             image: null,
+            //change the value here to location.hash.slice(1)
+            // this value is set at the begin and we want it to change when it is clicked
             imageId: null,
             hasMore: true
         },
@@ -58,16 +101,29 @@
                 .catch(function (error) {
                     console.log("error: ", error);
                 });
+            // //to change the value
+            // addEventListener('hashChange', function(){
+            //     console.log('Location change', location.hash);
+            // self.imageId = location.hash.slice(1)
+            // });
+            //remeber to change the value when the modal is closed
+            //the image is not chnage when the id is changed in the url
+            //use wathc...
         },
+        // watch: {
+        //     imageId: function(){
+        //         console.log('imageId prop just updated')
+        //         //change the imageId
+        //         //copy and past all the things in the mounted fucntion
+        //     }
+        // },
+
         methods: {
             handleFileChange: function (e) {
-                //update the image property
                 this.image = e.target.files[0];
             },
             handleUpload: function (e) {
-                //prevent default behavior
                 e.preventDefault();
-                //POST data to the /uploads path with axios
                 var formData = new FormData();
                 formData.append("title", this.title);
                 formData.append("description", this.description);
@@ -78,10 +134,12 @@
                     this.images.unshift(res.data);
                 });
             },
+            // remove this method
             getImageId: function (img) {
                 this.imageId = img.id;
                 console.log("getImageId worked");
             },
+
             closeMe: function () {
                 console.log("closeme in the instance");
                 this.imageId = null;

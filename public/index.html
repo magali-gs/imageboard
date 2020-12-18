@@ -5,8 +5,8 @@
     <title>My imageboard</title>
 </head>
 <body>
-    <header>
-      <h1>Imageboard</h1>
+    <header class="title">
+      Imageboard
     </header>
     <main>
         <div id='main' class="wrapper">
@@ -30,28 +30,56 @@
             <h3>Latest Images</h3>
             <div class="images-field">
                 <div class="card" v-for='image in images' :key='image.url'>
+                    <!-- <a :href="'#' + img.id"> -->
                     <img v-bind:src="image.url" :alt="image.title" @click='getImageId(image)'>
                     <p>{{image.title}}</p>
+                    <!-- </a> -->
                 </div>
             </div>
+            
             <button @click='moreImages' v-if='hasMore'>More</button>
-            <highlighted-image
+
+            <!--  VUE component for image-modal -->
+            <image-modal
             v-if='imageId'
-            :image-Id='imageId'
-            @close="closeMe"
-            ></highlighted-image>
+            :image-id='imageId'
+            @close="closeMe">
+            </image-modal>
         </div>
     </main>
     <footer>footer</footer>
-    <script id='template' type="text/x-template">
+     <!--  template for image-modal -->
+    <script id='image-template' type="text/x-template">
         <div class="component">
             <h4 @click='closeModal'>Close me</h4>
             <img :src="url">
-            <h1>{{imageId}}</h1>
             <h3>{{title}}</h3>
             <p>{{description}}</p>
             <p>Uploaded by {{username}} on {{created_at}}</p>
-            
+             <!--  VUE component for image-modal -->
+            <comments-modal
+                :image-id="imageId">
+            </comments-modal>
+        </div>
+    </script>
+
+    <!--  template for comments-modal -->
+    <script id='comments-template' type="text/x-template">
+        <div class="component">
+            <h2>Add a comment!</h2>
+
+            <label for="comment">Comment</label>
+            <input type="text" name="comment" v-model="comment"></input>
+
+            <label for="username">Username</label>
+            <input type="text" name="username" v-model="userComment"></input>
+
+            <button @click='uploadComment'>Submit</button>
+
+            <div class="comments" v-for='comment in comments'>
+                <p>{{comment.comment}}</p>
+                <p>{{comment.username}} on {{comment.created_at}} </p>
+            </div>
         </div>
     </script>
     <script src="/js/vue.js"></script>

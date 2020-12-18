@@ -26,6 +26,10 @@ const uploader = multer({
     }
 });
 
+app.use(express.json({
+    extended: false
+}));
+
 app.use(express.static("./public"));
 
 app.get('/images', (req, res) => {
@@ -39,7 +43,6 @@ app.get('/images', (req, res) => {
 
 app.post("/upload", uploader.single('image'), s3.upload, (req, res) => {
     console.log('POST request made');
-    console.log("req.body", req.body);
     if(req.file) {
         let uploadedImage = {
             title: req.body.title,
@@ -75,7 +78,6 @@ app.get("/highlighted/:imageId", (req, res) => {
 app.get("/more/:lastId", (req, res) => {
     const { lastId } = req.params;
     console.log("GET request made to /more",lastId);
-    console.log(lastId);
     db.getMoreImages(lastId)
         .then(({ rows }) => {
             res.json(rows);
@@ -84,12 +86,24 @@ app.get("/more/:lastId", (req, res) => {
 });
 
 app.get('/comments/:imageId', (req, res) => {
-    console.log("GET request made to /comments");
-    console.log(req.params.id);
+    console.log("GET request made to /comments/:imageId");
+    const { imageId } = req.params;
+    db.getComments(imageId)
+        .then(({ rows }) => {
+            res.json(rows);
+        })
+        .catch((err) => console.log("Error in getMoreImages", err));
 });
 
 app.post("/comments", (req, res) => {
     console.log("POST request made to /comments");
+    const { imageId, comment, userComment } = req.body;
+    db.insertComment(userComment, comment, imageId)
+        .then(({ rows }) => {
+            console.log("comented!", rows);
+            res.json(rows);
+        })
+        .catch((err) => console.log("Error in insertComment", err));
 });
 
 
