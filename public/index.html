@@ -30,10 +30,10 @@
             <h3>Latest Images</h3>
             <div class="images-field">
                 <div class="card" v-for='image in images' :key='image.url'>
-                    <!-- <a :href="'#' + img.id"> -->
-                    <img v-bind:src="image.url" :alt="image.title" @click='getImageId(image)'>
+                    <a :href="'#' + image.id">
+                    <img v-bind:src="image.url" :alt="image.title">
                     <p>{{image.title}}</p>
-                    <!-- </a> -->
+                    </a>
                 </div>
             </div>
             
