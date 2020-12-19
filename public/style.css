@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&family=Sedgwick+Ave+Display&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Montserrat:900i&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Montserrat&display=swap');
 
 * {
     box-sizing: border-box;
@@ -11,14 +10,9 @@ body {
     font-family: 'Montserrat', sans-serif;
     color: #1a1a1a;
     display: grid;
-    grid-template-rows: 30vh 1fr 3vh;
+    grid-template-rows: 20vh 1fr 3vh;
     min-height: 100vh;
-}
-
-header {
-    display:flex;
-    justify-content: center;
-    align-items: center;
+    
 }
 
 main {
@@ -30,31 +24,41 @@ footer {
     border: 1px solid #1a1a1a;
 }
 
-
 .title {
-    font-size: calc(15rem + 1vmin);
-	text-align: center;
-    height:30vh;
-    line-height: 30vh;
-	color: #f4f4f3;
-	background: #ffd53b;
-	font-family: 'Niconne', cursive;
-	font-weight: 700;
-    text-shadow: 5px 5px 0px #f16a78, 
-                  10px 10px 0px #f16a78, 
-                  15px 15px 0px #7da6b1, 
-                  20px 20px 0px #7da6b1, 
-                  25px 25px 0px #7da6b1, 
-                  30px 30px 0px #ffd53b, 
-                  35px 35px 0px #ffd53b, 
-                  40px 40px 0px #ffd53b, 
-                  45px 45px 0px #ffd53b;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    font-family: 'Major Mono Display', monospace;
+    font-size: 10vh;
+    font-weight: 900;
+    background-color: #000;
+    color: #f4f4f3;
+    display: block;
+    padding: .5em;
+    letter-spacing: .2em;
+}
+
+h1:nth-child(2) {
+    position: absolute;
+    background-color: #f4f4f3;
+    color: #000;
+    clip-path: inset(-1% -1% 50% -1%);
+}
+
+a {
+    text-decoration: none;
+    color: #f4f4f3;
 }
 
 .wrapper {
     display: grid;
-    grid-template-rows: 15vh 5vh 1fr;
+    grid-template-rows: 25vh 5vh 1fr 5vh;
     margin: 2vh 2vw;
+    grid-gap: 2vh;
 }
 
 .images-field {
@@ -62,6 +66,10 @@ footer {
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     grid-gap: 1em;
     margin: 1vh 1vw;
+}
+
+.wrapper button {
+    justify-self: center;
 }
 
 .card {
@@ -76,7 +84,7 @@ footer {
 
 .card p {
     padding: 20px 10px;
-    background-color:rgba(125, 166, 177, 0.7);
+    background-color: rgba(26, 26, 26, 0.918);
     width: 100%;
     font-size: calc(.6rem + 1vmin);
     font-weight: bolder;
@@ -84,8 +92,34 @@ footer {
 
 img {
     width: 100%;
-    height: 250px;
+    height: 230px;
     object-fit: cover;
+}
+
+.input-field {
+    padding-top: 10vh;
+}
+
+.form-container {
+    position: relative;
+}
+
+.form-container label {
+    position: absolute;
+    left: 8px;
+    top: 0;
+    opacity: 0;
+    transition: all 200ms;
+}
+
+.form-container input:not(:placeholder-shown) + label {
+    background-color: #fff;
+    transform: translate(0, -50%);
+    opacity: 1;
+}
+
+h2 {
+    margin-bottom: 5vh;
 }
 
 label {
@@ -115,7 +149,10 @@ button {
     font-family: inherit;
     cursor: pointer;
     font-size: calc(0.5rem + 1vmin);
+    width: 10vw;
+    height: 5vh;
 }
+
 
 .inputfile::-webkit-file-upload-button {
   visibility: hidden;
@@ -128,7 +165,40 @@ button {
     cursor: pointer;
     font-size: calc(.5rem + 1vmin);
 }
+.modal {
+    position: fixed;
+    display: grid;
+    grid-template-columns: 1fr 40vw;
+    grid-template-rows: 7vh 1fr;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    margin: 0;
+    left: 0;
+    padding: 1vh 1vw;
+    background-color: #fff;
 
+}
+
+.modal img {
+    height: 500px;
+    width: 500px;
+
+}
+
+.closeBtn {
+    grid-column: 1 / span 2;
+    justify-self: end;
+    cursor: pointer;
+    padding: 1vh 1vw;
+    font-size: calc(1.5rem + 1vmin);
+}
+
+
+.closeBtn:hover {
+    color: #000;
+    background-color: #fff;
+}
 
 @media screen and (max-width: 600px) {
    .images-field {
