@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Montserrat+Alternates:wght@100;400&display=swap');
 
 * {
     box-sizing: border-box;
@@ -7,7 +7,7 @@
 
 body {
     background-color: #f4f4f3;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat Alternates', sans-serif;
     color: #1a1a1a;
     display: grid;
     grid-template-rows: 20vh 1fr 3vh;
@@ -18,10 +18,6 @@ body {
 main {
     display: flex;
     flex-direction: column;
-}
-
-footer {
-    border: 1px solid #1a1a1a;
 }
 
 .title {
@@ -62,10 +58,18 @@ a {
 }
 
 .images-field {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    grid-gap: 1em;
-    margin: 1vh 1vw;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+p {
+    padding: 1vh 1vw;
+}
+
+.italic {
+    font-style: italic;
+    font-weight: 100;
 }
 
 .wrapper button {
@@ -73,28 +77,43 @@ a {
 }
 
 .card {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 300px;
-    width: 400px;
+  margin: 30px auto;
+  width: 400px;
+  height: 300px;
+  border-radius: 40px;
+  box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
+  cursor: pointer;
+  transition: 0.4s;
 }
 
-.card p {
-    padding: 20px 10px;
-    background-color: rgba(26, 26, 26, 0.918);
-    width: 100%;
-    font-size: calc(.6rem + 1vmin);
-    font-weight: bolder;
+.card .card_image {
+  width: 100%;
+  height: 300px;
+  border-radius: 40px;
 }
 
-img {
-    width: 100%;
-    height: 230px;
-    object-fit: cover;
-}
+.card .card_image img {
+  width: inherit;
+  height: inherit;
+  border-radius: 40px;
+  object-fit: cover;
+} 
 
+.card .card_title {
+    text-align: center;
+    border-radius: 0px 0px 40px 40px;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    margin-top: -80px;
+    height: 40px;
+}   
+
+.card:hover {
+  transform: scale(0.9, 0.9);
+  box-shadow: 5px 5px 30px 15px rgba(0,0,0,0.25), 
+    -5px -5px 30px 15px rgba(0,0,0,0.22);
+}
 
 h2 {
     margin-bottom: 5vh;
@@ -244,7 +263,13 @@ button:active {
 
 .closeBtn:hover {
     color: #000;
-    background-color: #fff;
+    background-color: #f4f4f3;
+}
+
+.comments {
+    border-top: solid #1a1a1a;
+    border-bottom: solid #1a1a1a;
+    border-radius: 600px 50px 600px 50px/ 50px 600px 175px 605px;
 }
 
 @media screen and (max-width: 600px) {

@@ -36,8 +36,12 @@
             <div class="images-field">
                 <div class="card" v-for='image in images' :key='image.url'>
                     <a :href="'#' + image.id">
-                    <img v-bind:src="image.url" :alt="image.title">
-                    <p>{{image.title}}</p>
+                        <div class="card_image">
+                            <img v-bind:src="image.url" :alt="image.title">
+                        </div>
+                        <div class="card_title">
+                            <p>{{image.title}}</p>
+                        </div>
                     </a>
                 </div>
             </div>
@@ -52,16 +56,16 @@
             </image-modal>
         </div>
     </main>
-    <footer>footer</footer>
+    <footer>&copy Magali G.</footer>
      <!--  template for image-modal -->
     <script id='image-template' type="text/x-template">
         <div class="component modal">
             <h1 @click='closeModal' class='closeBtn'>X</h1>
-            <div>
+            <div class='image-modal'>
                 <img :src="url">
                 <h3>{{title}}</h3>
                 <p>{{description}}</p>
-                <p>Uploaded by {{username}} on {{created_at}}</p>
+                <p class='italic'>Uploaded by {{username}} on {{created_at}}</p>
             </div>
              <!--  VUE component for image-modal -->
              <div>
@@ -75,7 +79,7 @@
     <!--  template for comments-modal -->
     <script id='comments-template' type="text/x-template">
         <div class="component">
-            <h2>Add a comment!</h2>
+            <h3>Add a comment!</h3>
             <div class='form-container'>
                 <div class="field-wrapper">             
                     <input class='field-input' placeholder='Username' type="text" name="username" v-model="userComment" required></input>
@@ -89,7 +93,7 @@
             </div>
             <div class="comments" v-for='comment in comments'>
                 <p>{{comment.comment}}</p>
-                <p>{{comment.username}} on {{comment.cleaned_date}} </p>
+                <p class='italic'>{{comment.username}} on {{comment.created_at}} </p>
             </div>
         </div>
     </script>
