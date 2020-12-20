@@ -22,7 +22,17 @@ module.exports.uploadImageDb = (url, username, title, description) => {
 
 module.exports.getImageInfo = (imageId) => {
     const q = `
-    SELECT *
+    SELECT *, 
+        (SELECT id FROM images
+        WHERE id > $1
+        ORDER BY id
+        LIMIT 1
+        ) AS "next", 
+        (SELECT id FROM images
+        WHERE id < $1
+        ORDER BY id DESC
+        LIMIT 1
+        ) AS "previous" 
     FROM images
     WHERE id = $1;
     `;

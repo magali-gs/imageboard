@@ -8,7 +8,7 @@
 <body>
     <header class="title">
       <h1>In between</h1>
-      <h1>In between</h1>
+      <h1 class="title2">In between</h1>
     </header>
     <main>
         <div id='main' class="wrapper">
@@ -60,13 +60,16 @@
      <!--  template for image-modal -->
     <script id='image-template' type="text/x-template">
         <div class="component modal">
-            <h1 @click='closeModal' class='closeBtn'>X</h1>
+            <h1 @click='closeModal' class='close btn'>X</h1>
+            <h1 @click='previousImg' class='btn previous'><</h1>
+            <h1 @click='nextImg' class='btn next'>></h1>
             <div class='image-modal'>
                 <img :src="url">
                 <h3>{{title}}</h3>
                 <p>{{description}}</p>
-                <p class='italic'>Uploaded by {{username}} on {{created_at}}</p>
+                <p class='italic'>Uploaded by {{username}} on {{created_at}}</p>                
             </div>
+
              <!--  VUE component for image-modal -->
              <div>
                 <comments-modal
