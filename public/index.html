@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 <head>
+    <link rel="icon" type="image/png" href="/sao-paulo-icon.png" sizes="16x16">
     <link rel="stylesheet" href="/style.css">
     <title>My imageboard</title>
 </head>
@@ -11,21 +12,23 @@
     </header>
     <main>
         <div id='main' class="wrapper">
-            <div class="input-field">
-                <form method="POST" action="/upload" enctype="multipart/form-data" class="form-group">
-                    
-                    <input type="text" name="title" v-model="title" placeholder="Title">
-                    <label class="form-label" for="title">Title</label>
-                    
-                    <input type="text" name="description" v-model="description" placeholder="Description">
-                    <label class="form-label" for="description">Description</label>
-                    
-                    <input type="text" name="username" v-model="username" placeholder="Username">
-                    <label class="form-label" for="username">Username</label>
-                    
-                    <input class="inputfile" placeholder="Image" type="file" name="image" accept="image/*" v-on:change="handleFileChange">
-                    <label class="form-label" for="image">Image</label>
-
+            <div>
+                <form method="POST" action="/upload" enctype="multipart/form-data" class="form-container">
+                    <div class="field-wrapper">  
+                        <input class='field-input' type="text" name="title" v-model="title" placeholder="Title" required>
+                        <label class="field-label" for="title">Title</label>
+                    </div>
+                    <div class="field-wrapper">   
+                        <input class='field-input' type="text" name="description" v-model="description" placeholder="Description" required>
+                        <label class="field-label" for="description">Description</label>
+                    </div>
+                    <div class="field-wrapper">   
+                        <input class='field-input' type="text" name="username" v-model="username" placeholder="Username" required>
+                        <label class="field-label" for="username">Username</label>
+                    </div>
+                    <div class="field-wrapper">   
+                        <input class="inputfile field-input" placeholder="Image" type="file" name="image" accept="image/*" v-on:change="handleFileChange" required>
+                    </div>
                     <button @click="handleUpload">Upload</button>
                 </form>
             </div>
@@ -74,18 +77,19 @@
         <div class="component">
             <h2>Add a comment!</h2>
             <div class='form-container'>
-                                
-                <input class='form-input' placeholder='Username' type="text" name="username" v-model="userComment"></input>
-                <label class="form-label" for="username">Username</label>
-
-                <input class='form-input' placeholder='Comment' type="text" name="comment" v-model="comment"></input>
-                <label class="form-label" for="comment">Comment</label>
-            
+                <div class="field-wrapper">             
+                    <input class='field-input' placeholder='Username' type="text" name="username" v-model="userComment" required></input>
+                    <label class="field-label" for="username">Username</label>
+                </div> 
+                <div class="field-wrapper">  
+                    <input class='field-input' placeholder='Comment' type="text" name="comment" v-model="comment" required></input>
+                    <label class="field-label"for="comment">Comment</label>
+                </div> 
                 <button @click='uploadComment'>Submit</button>
             </div>
             <div class="comments" v-for='comment in comments'>
                 <p>{{comment.comment}}</p>
-                <p>{{comment.username}} on {{comment.created_at}} </p>
+                <p>{{comment.username}} on {{comment.cleaned_date}} </p>
             </div>
         </div>
     </script>
