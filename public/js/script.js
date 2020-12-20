@@ -29,7 +29,6 @@
                 axios
                     .get("/comments/" + this.imageId)
                     .then(function ({ data }) {
-                        console.log(data);
                         self.comments = data;
                     })
                     .catch(function (error) {
@@ -71,14 +70,24 @@
         mounted: function () {
             console.log("props: ", this.imageId);
             var self = this;
+            const options = {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+            };
             axios
                 .get("/highlighted/" + this.imageId)
                 .then(function ({ data }) {
+                    
                     self.title = data[0].title;
                     self.description = data[0].description;
                     self.username = data[0].username;
                     self.created_at = data[0].created_at;
                     self.url = data[0].url;
+                    console.log(
+                        data[0].created_at.toLocaleString(undefined, options)
+                    );
                 })
                 .catch(function (error) {
                     console.log("error: ", error);
@@ -91,11 +100,15 @@
                 axios
                     .get("/highlighted/" + this.imageId)
                     .then(function ({ data }) {
-                        self.title = data[0].title;
-                        self.description = data[0].description;
-                        self.username = data[0].username;
-                        self.created_at = data[0].created_at;
-                        self.url = data[0].url;
+                        if(data.length != 0) {
+                            self.title = data[0].title;
+                            self.description = data[0].description;
+                            self.username = data[0].username;
+                            self.created_at = data[0].created_at;
+                            self.url = data[0].url;
+                        } else {
+                            self.$emit("close");
+                        }
                     })
                     .catch(function (error) {
                         console.log("error: ", error);

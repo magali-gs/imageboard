@@ -70,6 +70,7 @@ app.get("/highlighted/:imageId", (req, res) => {
     const { imageId } = req.params;
     db.getImageInfo(imageId)
         .then(({ rows }) => {
+            rows[0].created_at = rows[0].created_at.toDateString();
             res.json(rows);
         })
         .catch((err) => console.log("Error in getImageInfo", err));
@@ -90,6 +91,7 @@ app.get('/comments/:imageId', (req, res) => {
     const { imageId } = req.params;
     db.getComments(imageId)
         .then(({ rows }) => {
+            rows[0].created_at = rows[0].created_at.toDateString();
             res.json(rows);
         })
         .catch((err) => console.log("Error in getMoreImages", err));
@@ -100,7 +102,6 @@ app.post("/comments", (req, res) => {
     const { imageId, comment, userComment } = req.body;
     db.insertComment(userComment, comment, imageId)
         .then(({ rows }) => {
-            console.log("comented!", rows);
             res.json(rows);
         })
         .catch((err) => console.log("Error in insertComment", err));

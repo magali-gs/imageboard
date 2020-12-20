@@ -218,7 +218,8 @@ button:active {
     outline: none;
     white-space: nowrap;
     cursor: pointer;
-    font-size: calc(.5rem + 1vmin);
+    font-size: calc(.4rem + 1vmin);
+    color: gray;
 }
 .modal {
     position: fixed;
