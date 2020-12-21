@@ -75,7 +75,7 @@
             axios
                 .get("/highlighted/" + this.imageId)
                 .then(function ({ data }) {
-                    console.log(data);
+ 
                     self.title = data[0].title;
                     self.description = data[0].description;
                     self.username = data[0].username;
@@ -95,7 +95,9 @@
                 axios
                     .get("/highlighted/" + this.imageId)
                     .then(function ({ data }) {
-                        if (data.length != 0) {
+                        if (data.length) {
+                            console.log(location.hash.slice(1));
+                            console.log(data[0].count);
                             self.title = data[0].title;
                             self.description = data[0].description;
                             self.username = data[0].username;
@@ -116,44 +118,6 @@
             closeModal: function () {
                 console.log("closeModal click worked");
                 this.$emit("close");
-            },
-            previousImg: function () {
-                console.log("previous");
-                var self = this;
-                axios
-                    .get("/highlighted/" + this.previous)
-                    .then(function ({ data }) {
-                        self.title = data[0].title;
-                        self.description = data[0].description;
-                        self.username = data[0].username;
-                        self.created_at = data[0].created_at;
-                        self.url = data[0].url;
-                        self.previous = data[0].previous;
-                        self.next = data[0].next;
-                        location.hash = data[0].previous;
-                    })
-                    .catch(function (error) {
-                        console.log("error: ", error);
-                    });
-            },
-            nextImg: function () {
-                console.log("next");
-                var self = this;
-                axios
-                    .get("/highlighted/" + this.next)
-                    .then(function ({ data }) {
-                        self.title = data[0].title;
-                        self.description = data[0].description;
-                        self.username = data[0].username;
-                        self.created_at = data[0].created_at;
-                        self.url = data[0].url;
-                        self.previous = data[0].previous;
-                        self.next = data[0].next;
-                        location.hash = data[0].next;
-                    })
-                    .catch(function (error) {
-                        console.log("error: ", error);
-                    });
             },
         },
     });

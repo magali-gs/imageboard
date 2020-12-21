@@ -61,8 +61,8 @@
     <script id='image-template' type="text/x-template">
         <div class="component modal">
             <h1 @click='closeModal' class='close btn'>X</h1>
-            <h1 @click='previousImg' class='btn previous'><</h1>
-            <h1 @click='nextImg' class='btn next'>></h1>
+            <h1 class='btn previous' v-if='next'><a :href="'#'+next" class='btn'><</a></h1>
+            <h1 class='btn next' v-if='previous'><a :href="'#'+previous" class='btn'>></a></h1>
             <div class='image-modal'>
                 <img :src="url">
                 <h3>{{title}}</h3>
@@ -94,7 +94,7 @@
                 </div> 
                 <button @click='uploadComment'>Submit</button>
             </div>
-            <div class="comments" v-for='comment in comments'>
+            <div v-if='comment' class="comments" v-for='comment in comments' :key='comment.comment'>
                 <p>{{comment.comment}}</p>
                 <p class='italic'>{{comment.username}} on {{comment.created_at}} </p>
             </div>

@@ -38,7 +38,11 @@ app.get('/images', (req, res) => {
         .then(({ rows }) => {
             res.json(rows);
         })
-        .catch((err) => console.log("Error in getImage", err));
+        .catch((err) => {
+            console.log("Error in getImage", err);
+            res.json({ success: false });
+        });
+
 });
 
 app.post("/upload", uploader.single('image'), s3.upload, (req, res) => {
@@ -57,7 +61,10 @@ app.post("/upload", uploader.single('image'), s3.upload, (req, res) => {
             uploadedImage.description
         )
             .then(res.json(uploadedImage))
-            .catch((err) => console.log("Error in uploadImageDb", err));
+            .catch((err) => {
+                console.log("Error in uploadImageDb", err);
+                res.json({ success: false });
+            });
     } else {
         res.json({
             success: false
@@ -73,7 +80,10 @@ app.get("/highlighted/:imageId", (req, res) => {
             rows[0].created_at = rows[0].created_at.toDateString();
             res.json(rows);
         })
-        .catch((err) => console.log("Error in getImageInfo", err));
+        .catch((err) => {
+            console.log("Error in getImageInfo", err);
+            res.json({ success: false });
+        });
 });
 
 app.get("/more/:lastId", (req, res) => {
@@ -83,7 +93,10 @@ app.get("/more/:lastId", (req, res) => {
         .then(({ rows }) => {
             res.json(rows);
         })
-        .catch((err) => console.log("Error in getMoreImages", err));
+        .catch((err) => {
+            console.log("Error in getMoreImages", err);
+            res.json({ success: false });
+        });
 });
 
 app.get('/comments/:imageId', (req, res) => {
@@ -94,7 +107,10 @@ app.get('/comments/:imageId', (req, res) => {
             rows[0].created_at = rows[0].created_at.toDateString();
             res.json(rows);
         })
-        .catch((err) => console.log("Error in getMoreImages", err));
+        .catch((err) => {
+            console.log("Error in getComments", err);
+            res.json({ success: false });
+        });
 });
 
 app.post("/comments", (req, res) => {
@@ -104,7 +120,10 @@ app.post("/comments", (req, res) => {
         .then(({ rows }) => {
             res.json(rows);
         })
-        .catch((err) => console.log("Error in insertComment", err));
+        .catch((err) => {
+            console.log("Error in insertComment", err);
+            res.json({ success: false });
+        });
 });
 
 

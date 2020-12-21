@@ -45,7 +45,7 @@ h1 {
     clip-path: inset(-1% -1% 50% -1%);
 }
 
-.card a {
+a {
     text-decoration: none;
     color: #f4f4f3;
 }

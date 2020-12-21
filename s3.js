@@ -35,7 +35,7 @@ module.exports.upload = (req, res, next) => {
             next();
             //optional clean up
             //this is called a noop function - no operation
-            // fs.unlink(path, () => {});
+            fs.unlink(path, () => {});
         })
         .catch((err) => {
             // uh oh

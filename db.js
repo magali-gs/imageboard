@@ -32,7 +32,7 @@ module.exports.getImageInfo = (imageId) => {
         WHERE id < $1
         ORDER BY id DESC
         LIMIT 1
-        ) AS "previous" 
+        ) AS "previous"
     FROM images
     WHERE id = $1;
     `;
