@@ -91,6 +91,7 @@ app.get("/more/:lastId", (req, res) => {
     console.log("GET request made to /more",lastId);
     db.getMoreImages(lastId)
         .then(({ rows }) => {
+            console.log(rows);
             res.json(rows);
         })
         .catch((err) => {
@@ -116,9 +117,16 @@ app.get('/comments/:imageId', (req, res) => {
 app.post("/comments", (req, res) => {
     console.log("POST request made to /comments");
     const { imageId, comment, userComment } = req.body;
+    const newComment = {
+        comment: comment,
+        username: userComment,
+        created_at: ""
+    };
     db.insertComment(userComment, comment, imageId)
         .then(({ rows }) => {
-            res.json(rows);
+            newComment.created_at = rows[0].created_at.toDateString();
+            console.log(newComment);
+            res.json(newComment);
         })
         .catch((err) => {
             console.log("Error in insertComment", err);

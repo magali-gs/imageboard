@@ -273,11 +273,13 @@ button:active {
     cursor: pointer;
     padding: 1vh 1vw;
     font-size: calc(1.5rem + 1vmin);
+    transition: .3s;
 }
 
 .btn:hover {
     color: #000;
     background-color: #f4f4f3;
+    transition: .3s;
 }
 
 .comments {

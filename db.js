@@ -6,7 +6,7 @@ module.exports.getImage = () => {
     SELECT *
     FROM images
     ORDER BY id DESC
-    LIMIT 9;
+    LIMIT 6;
     `;
     return db.query(q);
 };
@@ -69,7 +69,8 @@ module.exports.getComments = (imageId) => {
 module.exports.insertComment = (username, comment, image_id) => {
     const q = `
     INSERT INTO comments (username, comment, image_id)
-    VALUES ($1, $2, $3);
+    VALUES ($1, $2, $3)
+    RETURNING created_at;
     `;
     const params = [username, comment, image_id];
     return db.query(q, params);

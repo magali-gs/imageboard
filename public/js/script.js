@@ -48,9 +48,13 @@
                     userComment: this.userComment,
                 };
                 console.log(commentData);
-                axios.post("/comments", commentData).then((res) => {
-                    self.comments.unshift(res.data);
-                });
+                axios.post("/comments", commentData)
+                    .then(({data}) => {
+                        console.log('res', data);
+                        self.comments.unshift(data);
+                    }).catch((error) => {
+                        console.log('error in add comment', error);
+                    });
             },
         },
     });
@@ -139,6 +143,9 @@
                 .get("/images")
                 .then(function (res) {
                     self.images = res.data;
+                    if(self.images.length > 6) {
+                        self.hasMore = true;
+                    }
                 })
                 .catch(function (error) {
                     console.log("error: ", error);
@@ -177,6 +184,8 @@
                         data.forEach((element) => {
                             if(element.id == element.lowestId) {
                                 self.hasMore = false;
+                            } else {
+                                self.hasMore = true;
                             }
                             self.images.push(element);
                         });
