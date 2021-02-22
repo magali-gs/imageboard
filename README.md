@@ -1,4 +1,4 @@
-# Purãngaw
+# Imageboard
 A Vue.js based, Single-Page Application imageboard that I created in Spiced Academy bootcamp as one of the assignments. 
 
 ## Table of contents
@@ -27,16 +27,16 @@ Clone this repo to your desktop and run ```npm install``` to install all the dep
 
 ## Showroom
 ### Upload
-![]()
+![](/public/upload.gif)
 
 ### Previous and next button
-![]()
+![](/public/prev_next-btn.gif)
 
 ### Pagination with More button
-![]()
+![](/public/pagination.gif)
 
-### Image modal
-![]()
+### Image modal and comments
+![](/public/comment.gif)
 
 ## To-do
 Next functionalities I want to add:
